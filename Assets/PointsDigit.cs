@@ -12,7 +12,7 @@ public class PointsDigit : MonoBehaviour
 
 	public void SetSprite(Sprite sprite)
 	{
-		if (sprite)
+		if (sprite && _renderer)
 		{
 			_renderer.sprite = sprite;
 		}

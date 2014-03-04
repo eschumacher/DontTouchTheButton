@@ -15,6 +15,7 @@ public class GameMaster : MonoBehaviour {
 	public Sprite num0, num1, num2, num3, num4;
 	public Sprite num5, num6, num7, num8, num9;
 	private Sprite[] _numSprites;
+	public PointsDigit _timeDigit1, _timeDigit2, _timeDigit3;
 
 	void Start()
 	{
@@ -32,6 +33,7 @@ public class GameMaster : MonoBehaviour {
 		CheckTouch();
 		CheckLifeTimer();
 		PrintScore();
+		PrintTime();
 	}
 
 	private void CheckLifeTimer()
@@ -206,6 +208,21 @@ public class GameMaster : MonoBehaviour {
 			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_touches / 100]);
 			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[(_touches % 100) / 10]);
 			((PointsDigit)_pointsDigits[2]).SetSprite(_numSprites[_touches % 10]);
+		}
+	}
+
+	private void PrintTime()
+	{
+		int ones = (int)(_lifeTimer);
+		int fractional = (int)((_lifeTimer - ones) * 100);
+		int decs = fractional / 10;
+		int hunds = fractional % 10;
+
+		if (ones >= 0)
+		{
+			_timeDigit1.SetSprite (_numSprites [ones]);
+			_timeDigit2.SetSprite (_numSprites [decs]);
+			_timeDigit3.SetSprite (_numSprites [hunds]);
 		}
 	}
 
