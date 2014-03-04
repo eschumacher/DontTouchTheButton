@@ -57,72 +57,72 @@ TextureImporter:
     - name: Numbers_2
       rect:
         serializedVersion: 2
-        x: 43
+        x: 35
         y: 1
-        width: 15
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_3
       rect:
         serializedVersion: 2
-        x: 67
+        x: 65
         y: 1
-        width: 24
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_4
       rect:
         serializedVersion: 2
-        x: 96
+        x: 94
         y: 1
-        width: 24
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_5
       rect:
         serializedVersion: 2
-        x: 124
+        x: 123
         y: 1
-        width: 25
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_6
       rect:
         serializedVersion: 2
-        x: 154
+        x: 151
         y: 1
-        width: 23
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_7
       rect:
         serializedVersion: 2
-        x: 182
+        x: 181
         y: 1
-        width: 25
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_9
       rect:
         serializedVersion: 2
-        x: 212
+        x: 208
         y: 1
-        width: 22
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
     - name: Numbers_10
       rect:
         serializedVersion: 2
-        x: 239
+        x: 238
         y: 1
-        width: 25
+        width: 26
         height: 34
       alignment: 1
       pivot: {x: 0, y: 1}

@@ -10,10 +10,20 @@ public class GameMaster : MonoBehaviour {
 	public Button _buttonPrefab;
 	ArrayList _buttons = new ArrayList();
 	byte _buttonsPerSpawn = 1;
+	ArrayList _pointsDigits = new ArrayList();
+	public PointsDigit _digitsPrefab;
+	public Sprite num0, num1, num2, num3, num4;
+	public Sprite num5, num6, num7, num8, num9;
+	private Sprite[] _numSprites;
 
 	void Start()
 	{
+		_numSprites = new Sprite[10] { num0, num1, num2,
+										num3, num4, num5,
+										num6, num7, num8,
+										num9 };
 		SpawnButtons();
+		AddPointsDigit();
 	}
 
 	// Update is called once per frame
@@ -21,6 +31,7 @@ public class GameMaster : MonoBehaviour {
 	{
 		CheckTouch();
 		CheckLifeTimer();
+		PrintScore();
 	}
 
 	private void CheckLifeTimer()
@@ -153,10 +164,49 @@ public class GameMaster : MonoBehaviour {
 		_buttons.Add(Instantiate(_buttonPrefab, newPos, Quaternion.identity));
 	}
 
+	private void AddPointsDigit()
+	{
+		// calc coords offset based on number of existing digits
+		float xOffset = _pointsDigits.Count * 0.3f;
+
+		Vector3 pos = new Vector3 (-1.2f + xOffset, 4.801f, 0.0f);
+
+		_pointsDigits.Add (Instantiate (_digitsPrefab, pos, Quaternion.identity));
+	}
+
 	public void OnButtonTouch()
 	{
 		Debug.Log("Hit a button! Game over :(");
 		Application.Quit();
+	}
+
+	private void PrintScore()
+	{
+		if (_touches <= 9)
+		{
+			((PointsDigit)_pointsDigits [0]).SetSprite (_numSprites[_touches]);
+		}
+		else if (_touches <= 99)
+		{
+			if (_pointsDigits.Count < 2)
+			{
+				AddPointsDigit();
+			}
+
+			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_touches / 10]);
+			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[_touches % 10]);
+		}
+		else
+		{
+			if (_pointsDigits.Count < 3)
+			{
+				AddPointsDigit();
+			}
+
+			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_touches / 100]);
+			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[(_touches % 100) / 10]);
+			((PointsDigit)_pointsDigits[2]).SetSprite(_numSprites[_touches % 10]);
+		}
 	}
 
 	void OnGUI()
