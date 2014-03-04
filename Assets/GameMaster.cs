@@ -6,13 +6,14 @@ public class GameMaster : MonoBehaviour {
 	RuntimePlatform _platform = Application.platform;
 	float _timerRate = 5.0f;
 	float _lifeTimer = 5.0f;
-	ulong _touches = 0;
+	uint _touches = 0;
 	public Button _buttonPrefab;
 	ArrayList _buttons = new ArrayList();
+	byte _buttonsPerSpawn = 1;
 
 	void Start()
 	{
-		CreateButton();
+		SpawnButtons();
 	}
 
 	// Update is called once per frame
@@ -89,17 +90,58 @@ public class GameMaster : MonoBehaviour {
 	public void OnBackgroundTouch()
 	{
 		_touches++;
+		CheckLevelVariables();
 		_lifeTimer = _timerRate;
 
-		Debug.Log ("" + _buttons.Count);
+		DestroyAllButtons();
 
+		SpawnButtons();
+	}
+
+	private void SpawnButtons()
+	{
+		for (int i=0; i<_buttonsPerSpawn; i++)
+		{
+			CreateButton ();
+		}
+	}
+
+	private void DestroyAllButtons()
+	{
 		while (_buttons.Count > 0)
 		{
 			Destroy (((Button)_buttons[0]).gameObject);
 			_buttons.RemoveAt(0);
 		}
+	}
 
-		CreateButton();
+	private void CheckLevelVariables()
+	{
+		switch (_touches)
+		{
+		case 5:
+			_timerRate = 4.0f;
+			_buttonsPerSpawn++;
+			break;
+		case 10:
+			_timerRate = 3.0f;
+			_buttonsPerSpawn++;
+			break;
+		case 15:
+			_timerRate = 2.0f;
+			_buttonsPerSpawn++;
+			break;
+		case 25:
+			_timerRate = 1.0f;
+			_buttonsPerSpawn++;
+			break;
+		case 50:
+			_timerRate = 0.5f;
+			_buttonsPerSpawn++;
+			break;
+		default:
+			break;
+		}
 	}
 
 	private void CreateButton()
