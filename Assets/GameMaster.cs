@@ -225,10 +225,4 @@ public class GameMaster : MonoBehaviour {
 			_timeDigit3.SetSprite (_numSprites [hunds]);
 		}
 	}
-
-	void OnGUI()
-	{
-		GUI.Box (new Rect (10, 10, 50, 20), "" + _lifeTimer.ToString ("0"));
-		GUI.Box (new Rect (100, 10, 50, 20), "" + _touches.ToString ("0"));
-	}
 }
