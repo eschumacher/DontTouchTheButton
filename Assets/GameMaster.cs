@@ -5,7 +5,8 @@ public class GameMaster : MonoBehaviour {
 
 	RuntimePlatform _platform = Application.platform;
 	float _timerRate = 5.0f;
-	float _lifeTimer = _timerRate;
+	float _lifeTimer = 5.0f;
+	ulong _touches = 0;
 	public Button _buttonPrefab;
 
 	// Update is called once per frame
@@ -81,10 +82,11 @@ public class GameMaster : MonoBehaviour {
 
 	public void OnBackgroundTouch()
 	{
+		_touches++;
 		_lifeTimer = _timerRate;
 
-		Vector3 newPos = new Vector3(Random.Range(-3, 3),
-		                             Random.Range(-3, 3),
+		Vector3 newPos = new Vector3(Random.Range(-3.0f, 3.5f),
+		                             Random.Range(-4.2f, 3.1f),
 		                             -1.0f);
 		
 		Instantiate(_buttonPrefab, newPos, Quaternion.identity);
@@ -99,5 +101,6 @@ public class GameMaster : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.Box (new Rect (10, 10, 50, 20), "" + _lifeTimer.ToString ("0"));
+		GUI.Box (new Rect (100, 10, 50, 20), "" + _touches.ToString ("0"));
 	}
 }
