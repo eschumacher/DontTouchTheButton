@@ -8,6 +8,12 @@ public class GameMaster : MonoBehaviour {
 	float _lifeTimer = 5.0f;
 	ulong _touches = 0;
 	public Button _buttonPrefab;
+	ArrayList _buttons = new ArrayList();
+
+	void Start()
+	{
+		CreateButton();
+	}
 
 	// Update is called once per frame
 	void Update()
@@ -85,11 +91,24 @@ public class GameMaster : MonoBehaviour {
 		_touches++;
 		_lifeTimer = _timerRate;
 
-		Vector3 newPos = new Vector3(Random.Range(-3.0f, 3.5f),
+		Debug.Log ("" + _buttons.Count);
+
+		while (_buttons.Count > 0)
+		{
+			Destroy (((Button)_buttons[0]).gameObject);
+			_buttons.RemoveAt(0);
+		}
+
+		CreateButton();
+	}
+
+	private void CreateButton()
+	{
+		Vector3 newPos = new Vector3(Random.Range(-3.0f, 3.4f),
 		                             Random.Range(-4.2f, 3.1f),
 		                             -1.0f);
 		
-		Instantiate(_buttonPrefab, newPos, Quaternion.identity);
+		_buttons.Add(Instantiate(_buttonPrefab, newPos, Quaternion.identity));
 	}
 
 	public void OnButtonTouch()
