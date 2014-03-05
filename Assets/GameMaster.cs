@@ -171,7 +171,7 @@ public class GameMaster : MonoBehaviour {
 		// calc coords offset based on number of existing digits
 		float xOffset = _pointsDigits.Count * 0.3f;
 
-		Vector3 pos = new Vector3 (-1.2f + xOffset, 4.801f, 0.0f);
+		Vector3 pos = new Vector3 (-0.8f + xOffset, 4.801f, 0.0f);
 
 		_pointsDigits.Add (Instantiate (_digitsPrefab, pos, Quaternion.identity));
 	}
