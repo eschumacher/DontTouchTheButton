@@ -2,6 +2,11 @@
 # =============== #
 Temp/
 Library/
+
+# ============ #
+# Other Output #
+# ============ #
+*.apk
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -28,3 +33,4 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
+.gitignore~
