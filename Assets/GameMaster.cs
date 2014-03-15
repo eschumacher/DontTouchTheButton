@@ -7,6 +7,8 @@ public class GameMaster : MonoBehaviour {
 	float _timerRate = 5.0f;
 	float _lifeTimer = 5.0f;
 	uint _touches = 0;
+	private static uint _points = 0;
+	uint _pointsPerTouch = 1;
 	public Button _buttonPrefab;
 	ArrayList _buttons = new ArrayList();
 	byte _buttonsPerSpawn = 1;
@@ -36,6 +38,16 @@ public class GameMaster : MonoBehaviour {
 		PrintTime();
 	}
 
+	public static void ResetGame()
+	{
+		_points = 0;
+	}
+
+	public static uint GetPoints()
+	{
+		return _points;
+	}
+
 	private void CheckLifeTimer()
 	{
 		_lifeTimer -= Time.deltaTime;
@@ -45,8 +57,7 @@ public class GameMaster : MonoBehaviour {
 		if (_lifeTimer <= 0.0f)
 		{
 			// Game over :( You died
-			Debug.Log("YOU'RE DEAD! :(");
-			Application.Quit();
+			Application.LoadLevel("GameOverScene");
 		}
 	}
 
@@ -103,6 +114,7 @@ public class GameMaster : MonoBehaviour {
 	public void OnBackgroundTouch()
 	{
 		_touches++;
+		_points += _pointsPerTouch;
 		CheckLevelVariables();
 		_lifeTimer = _timerRate;
 
@@ -178,25 +190,24 @@ public class GameMaster : MonoBehaviour {
 
 	public void OnButtonTouch()
 	{
-		Debug.Log("Hit a button! Game over :(");
-		Application.Quit();
+		Application.LoadLevel("GameOverScene");
 	}
 
 	private void PrintScore()
 	{
-		if (_touches <= 9)
+		if (_points <= 9)
 		{
-			((PointsDigit)_pointsDigits [0]).SetSprite (_numSprites[_touches]);
+			((PointsDigit)_pointsDigits [0]).SetSprite (_numSprites[_points]);
 		}
-		else if (_touches <= 99)
+		else if (_points <= 99)
 		{
 			if (_pointsDigits.Count < 2)
 			{
 				AddPointsDigit();
 			}
 
-			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_touches / 10]);
-			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[_touches % 10]);
+			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_points / 10]);
+			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[_points % 10]);
 		}
 		else
 		{
@@ -205,9 +216,9 @@ public class GameMaster : MonoBehaviour {
 				AddPointsDigit();
 			}
 
-			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_touches / 100]);
-			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[(_touches % 100) / 10]);
-			((PointsDigit)_pointsDigits[2]).SetSprite(_numSprites[_touches % 10]);
+			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_points / 100]);
+			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[(_points % 100) / 10]);
+			((PointsDigit)_pointsDigits[2]).SetSprite(_numSprites[_points % 10]);
 		}
 	}
 
