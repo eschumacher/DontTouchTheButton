@@ -12,6 +12,11 @@ public class PointsDigit : MonoBehaviour
 
 	public void SetSprite(Sprite sprite)
 	{
+		if (!_renderer)
+		{
+			_renderer = gameObject.GetComponent<SpriteRenderer> ();
+		}
+
 		if (sprite && _renderer)
 		{
 			_renderer.sprite = sprite;

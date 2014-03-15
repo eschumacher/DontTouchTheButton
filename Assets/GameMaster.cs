@@ -52,8 +52,7 @@ public class GameMaster : MonoBehaviour {
 		if (_lifeTimer <= 0.0f)
 		{
 			// Game over :( You died
-			Debug.Log("YOU'RE DEAD! :(");
-			Application.Quit();
+			Application.LoadLevel("GameOverScene");
 		}
 	}
 
@@ -186,8 +185,7 @@ public class GameMaster : MonoBehaviour {
 
 	public void OnButtonTouch()
 	{
-		Debug.Log("Hit a button! Game over :(");
-		Application.Quit();
+		Application.LoadLevel("GameOverScene");
 	}
 
 	private void PrintScore()
