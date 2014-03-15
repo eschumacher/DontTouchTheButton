@@ -232,6 +232,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1221603124}
   - 212: {fileID: 1221603123}
+  - 61: {fileID: 1221603126}
+  - 114: {fileID: 1221603125}
   m_Layer: 0
   m_Name: myRetryButton
   m_TagString: Untagged
@@ -273,6 +275,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1221603125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221603122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b526cad4960ab45a43af34277e81dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1221603126
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221603122}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 3, y: 1.45000005}
+  m_Center: {x: 0, y: 0}
 --- !u!1 &1398131517
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +436,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 2048222895}
   - 212: {fileID: 2048222894}
+  - 114: {fileID: 2048222897}
+  - 61: {fileID: 2048222896}
   m_Layer: 0
   m_Name: myMenuButton
   m_TagString: Untagged
@@ -453,3 +479,25 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!61 &2048222896
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2048222893}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 3, y: 1.45000005}
+  m_Center: {x: 0, y: 0}
+--- !u!114 &2048222897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2048222893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a08df8abe959b48b3df5c31d76e057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

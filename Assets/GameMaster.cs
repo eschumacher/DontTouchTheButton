@@ -38,6 +38,11 @@ public class GameMaster : MonoBehaviour {
 		PrintTime();
 	}
 
+	public static void ResetGame()
+	{
+		_points = 0;
+	}
+
 	public static uint GetPoints()
 	{
 		return _points;
