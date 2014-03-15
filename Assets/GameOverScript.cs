@@ -5,6 +5,7 @@ public class GameOverScript : MonoBehaviour {
 
 	// number display variables
 	ArrayList _pointsDigits = new ArrayList();
+	ArrayList _highScoreDigits = new ArrayList();
 	public PointsDigit _digitsPrefab;
 	public Sprite num0, num1, num2, num3, num4;
 	public Sprite num5, num6, num7, num8, num9;
@@ -13,22 +14,43 @@ public class GameOverScript : MonoBehaviour {
 	// touch variables
 	RuntimePlatform _platform = Application.platform;
 
+	// score variables
+	uint _highScore = 0;
+	uint _points = 0;
+
 	// Use this for initialization
 	void Start ()
 	{
+		_points = GameMaster.GetPoints();
+
+		_highScore = (uint)PlayerPrefs.GetInt("HighScore", 0);
+		UpdateHighScore();
+
 		_numSprites = new Sprite[10] { num0, num1, num2,
 			num3, num4, num5,
 			num6, num7, num8,
 			num9 };
 
 		AddPointsDigit();
+		AddHighScoreDigit();
+
 		PrintScore();
+		PrintHighScore();
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
 		CheckTouch();
+	}
+
+	private void UpdateHighScore()
+	{
+		if (_points > _highScore)
+		{
+			_highScore = _points;
+			PlayerPrefs.SetInt("HighScore", (int)_highScore);
+		}
 	}
 
 	private void CheckTouch()
@@ -91,23 +113,31 @@ public class GameOverScript : MonoBehaviour {
 		_pointsDigits.Add (Instantiate (_digitsPrefab, pos, Quaternion.identity));
 	}
 
+	private void AddHighScoreDigit()
+	{
+		// calc coords offset based on number of existing digits
+		float xOffset = _highScoreDigits.Count * 0.3f;
+		
+		Vector3 pos = new Vector3 (1.2f + xOffset, 0.5f, 0.0f);
+		
+		_highScoreDigits.Add (Instantiate (_digitsPrefab, pos, Quaternion.identity));
+	}
+
 	private void PrintScore()
 	{
-		uint points = GameMaster.GetPoints();
-
-		if (points <= 9)
+		if (_points <= 9)
 		{
-			((PointsDigit)_pointsDigits [0]).SetSprite (_numSprites[points]);
+			((PointsDigit)_pointsDigits [0]).SetSprite (_numSprites[_points]);
 		}
-		else if (points <= 99)
+		else if (_points <= 99)
 		{
 			if (_pointsDigits.Count < 2)
 			{
 				AddPointsDigit();
 			}
 			
-			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[points / 10]);
-			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[points % 10]);
+			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_points / 10]);
+			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[_points % 10]);
 		}
 		else
 		{
@@ -116,9 +146,38 @@ public class GameOverScript : MonoBehaviour {
 				AddPointsDigit();
 			}
 			
-			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[points / 100]);
-			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[(points % 100) / 10]);
-			((PointsDigit)_pointsDigits[2]).SetSprite(_numSprites[points % 10]);
+			((PointsDigit)_pointsDigits[0]).SetSprite(_numSprites[_points / 100]);
+			((PointsDigit)_pointsDigits[1]).SetSprite(_numSprites[(_points % 100) / 10]);
+			((PointsDigit)_pointsDigits[2]).SetSprite(_numSprites[_points % 10]);
+		}
+	}
+
+	private void PrintHighScore()
+	{
+		if (_highScore <= 9)
+		{
+			((PointsDigit)_highScoreDigits [0]).SetSprite (_numSprites[_highScore]);
+		}
+		else if (_highScore <= 99)
+		{
+			if (_highScoreDigits.Count < 2)
+			{
+				AddHighScoreDigit();
+			}
+			
+			((PointsDigit)_highScoreDigits[0]).SetSprite(_numSprites[_highScore / 10]);
+			((PointsDigit)_highScoreDigits[1]).SetSprite(_numSprites[_highScore % 10]);
+		}
+		else
+		{
+			if (_highScoreDigits.Count < 3)
+			{
+				AddHighScoreDigit();
+			}
+			
+			((PointsDigit)_highScoreDigits[0]).SetSprite(_numSprites[_highScore / 100]);
+			((PointsDigit)_highScoreDigits[1]).SetSprite(_numSprites[(_highScore % 100) / 10]);
+			((PointsDigit)_highScoreDigits[2]).SetSprite(_numSprites[_highScore % 10]);
 		}
 	}
 }
