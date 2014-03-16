@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonPrefab: {fileID: 11400000, guid: 7ebd757c6b0ceec4091b705e9fe1c1ae, type: 2}
+  _powerUp2xPrefab: {fileID: 11400000, guid: f1e0a2caa579bc14cbaf7ecbb4c8ae7a, type: 2}
   _digitsPrefab: {fileID: 11400000, guid: 55dde3f82a79162479448368e6660c40, type: 2}
   num0: {fileID: 21300000, guid: 5f2bea56973bc444795697a5d0b81cb2, type: 3}
   num1: {fileID: 21300002, guid: 5f2bea56973bc444795697a5d0b81cb2, type: 3}
