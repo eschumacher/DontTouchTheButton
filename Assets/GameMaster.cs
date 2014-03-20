@@ -6,11 +6,13 @@ public class GameMaster : MonoBehaviour {
 	RuntimePlatform _platform = Application.platform;
 	float _timerRate = 5.0f;
 	float _lifeTimer = 5.0f;
+	float _freezeRate = 0.0f;
 	uint _touches = 0;
 	private static uint _points = 0;
 	uint _pointsPerTouch = 1;
 	public Button _buttonPrefab;
 	public PowerUp2xScript _powerUp2xPrefab;
+	public PowerUpFreezeScript _powerUpFreezePrefab;
 	ArrayList _buttons = new ArrayList();
 	MonoBehaviour _powerup = null;
 	byte _buttonsPerSpawn = 1;
@@ -23,6 +25,7 @@ public class GameMaster : MonoBehaviour {
 
 	// power up variables
 	float _powerup2xTimer = 0.0f;
+	float _powerupFreezeTimer = 0.0f;
 
 	void Start()
 	{
@@ -57,7 +60,8 @@ public class GameMaster : MonoBehaviour {
 	private void CheckLifeTimer()
 	{
 		_lifeTimer -= Time.deltaTime;
-		
+
+		// TODO: blue background for freeze powerup?
 		Camera.main.backgroundColor = Color.Lerp (Color.red, Color.white, _lifeTimer / _timerRate);
 		
 		if (_lifeTimer <= 0.0f)
@@ -76,6 +80,16 @@ public class GameMaster : MonoBehaviour {
 			if (_powerup2xTimer <= 0.0f)
 			{
 				_pointsPerTouch = 1;
+			}
+		}
+
+		if (_powerupFreezeTimer > 0.0f)
+		{
+			// Freeze powerup is active, let's check its timer
+			_powerupFreezeTimer -= Time.deltaTime;
+			if (_powerupFreezeTimer <= 0.0f)
+			{
+				_freezeRate = 0.0f;
 			}
 		}
 	}
@@ -135,7 +149,7 @@ public class GameMaster : MonoBehaviour {
 		_touches++;
 		_points += _pointsPerTouch;
 		CheckLevelVariables();
-		_lifeTimer = _timerRate;
+		_lifeTimer = _timerRate + _freezeRate;
 
 		DestroyAllButtons();
 		DestroyInactivePowerup();
@@ -159,7 +173,7 @@ public class GameMaster : MonoBehaviour {
 
 		if (rand == 3)
 		{
-			CreatePowerUp(Random.Range(0, 0));
+			CreatePowerUp(Random.Range(1, 1));
 		}
 	}
 
@@ -232,6 +246,11 @@ public class GameMaster : MonoBehaviour {
 				prefab = _powerUp2xPrefab;
 				break;
 			}
+			case 1:
+			{
+				prefab = _powerUpFreezePrefab;
+				break;
+			}
 		}
 
 		_powerup = (MonoBehaviour)Instantiate(prefab, newPos, Quaternion.identity);
@@ -260,6 +279,18 @@ public class GameMaster : MonoBehaviour {
 		// start a timer for the powerup to last
 		_powerup2xTimer = 5.0f;
 
+		// also treat this as a background touch
+		OnBackgroundTouch();
+	}
+
+	public void OnPowerupFreezeTouch()
+	{
+		// slow touches down
+		_freezeRate = 5.0f;
+		
+		// start a timer for the powerup to last
+		_powerupFreezeTimer = 10.0f;
+		
 		// also treat this as a background touch
 		OnBackgroundTouch();
 	}
