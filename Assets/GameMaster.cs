@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour {
 	public Button _buttonPrefab;
 	public PowerUp2xScript _powerUp2xPrefab;
 	public PowerUpFreezeScript _powerUpFreezePrefab;
+	public PowerUpBombScript _powerUpBombPrefab;
 	ArrayList _buttons = new ArrayList();
 	MonoBehaviour _powerup = null;
 	byte _buttonsPerSpawn = 1;
@@ -26,6 +27,8 @@ public class GameMaster : MonoBehaviour {
 	// power up variables
 	float _powerup2xTimer = 0.0f;
 	float _powerupFreezeTimer = 0.0f;
+	float _powerupBombTimer = 0.0f;
+	private bool _spawnButtons = true;
 
 	void Start()
 	{
@@ -90,6 +93,16 @@ public class GameMaster : MonoBehaviour {
 			if (_powerupFreezeTimer <= 0.0f)
 			{
 				_freezeRate = 0.0f;
+			}
+		}
+
+		if (_powerupBombTimer > 0.0f)
+		{
+			// Bomb powerup is active, let's check its timer
+			_powerupBombTimer -= Time.deltaTime;
+			if (_powerupBombTimer <= 0.0f)
+			{
+				_spawnButtons = true;
 			}
 		}
 	}
@@ -161,19 +174,22 @@ public class GameMaster : MonoBehaviour {
 
 	private void SpawnButtons()
 	{
-		for (int i=0; i<_buttonsPerSpawn; i++)
+		if (_spawnButtons)
 		{
-			CreateButton ();
+			for (int i=0; i<_buttonsPerSpawn; i++)
+			{
+				CreateButton();
+			}
 		}
 	}
 
 	private void SpawnPowerup()
 	{
-		int rand = Random.Range (1, 10);
+		int rand = Random.Range (1, 7);
 
 		if (rand == 3)
 		{
-			CreatePowerUp(Random.Range(1, 1));
+			CreatePowerUp(Random.Range(0, 3));
 		}
 	}
 
@@ -251,6 +267,16 @@ public class GameMaster : MonoBehaviour {
 				prefab = _powerUpFreezePrefab;
 				break;
 			}
+			case 2:
+			{
+				prefab = _powerUpBombPrefab;
+				break;
+			}
+			default:
+			{
+				Debug.Log("BAD PUPTYPE!!!");
+				break;
+			}
 		}
 
 		_powerup = (MonoBehaviour)Instantiate(prefab, newPos, Quaternion.identity);
@@ -291,6 +317,18 @@ public class GameMaster : MonoBehaviour {
 		// start a timer for the powerup to last
 		_powerupFreezeTimer = 10.0f;
 		
+		// also treat this as a background touch
+		OnBackgroundTouch();
+	}
+
+	public void OnPowerupBombTouch()
+	{
+		// stop button spawning for 3 seconds
+		_spawnButtons = false;
+
+		// start a timer for the powerup to last
+		_powerupBombTimer = 3.0f;
+
 		// also treat this as a background touch
 		OnBackgroundTouch();
 	}
