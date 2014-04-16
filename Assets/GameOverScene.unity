@@ -173,6 +173,8 @@ MonoBehaviour:
   num7: {fileID: 21300014, guid: 5f2bea56973bc444795697a5d0b81cb2, type: 3}
   num8: {fileID: 21300016, guid: 5f2bea56973bc444795697a5d0b81cb2, type: 3}
   num9: {fileID: 21300018, guid: 5f2bea56973bc444795697a5d0b81cb2, type: 3}
+  _retryButton: {fileID: 1221603125}
+  _menuButton: {fileID: 2048222897}
 --- !u!1 &972796194
 GameObject:
   m_ObjectHideFlags: 0

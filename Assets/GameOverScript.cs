@@ -10,6 +10,9 @@ public class GameOverScript : MonoBehaviour {
 	public Sprite num0, num1, num2, num3, num4;
 	public Sprite num5, num6, num7, num8, num9;
 	private Sprite[] _numSprites;
+	public RetryButtonScript _retryButton;
+	public MenuButtonScript _menuButton;
+	private float _buttonDisplayTimer = 1.2f;
 
 	// touch variables
 	RuntimePlatform _platform = Application.platform;
@@ -21,6 +24,11 @@ public class GameOverScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
+		_retryButton.renderer.enabled = false;
+		_menuButton.renderer.enabled = false;
+		_retryButton.collider2D.enabled = false;
+		_menuButton.collider2D.enabled = false;
+
 		_points = GameMaster.GetPoints();
 
 		_highScore = (uint)PlayerPrefs.GetInt("HighScore", 0);
@@ -41,6 +49,15 @@ public class GameOverScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		_buttonDisplayTimer -= Time.deltaTime;
+
+		if (_buttonDisplayTimer <= 0.0f)
+		{
+			_retryButton.renderer.enabled = true;
+			_menuButton.renderer.enabled = true;
+			_retryButton.collider2D.enabled = true;
+			_menuButton.collider2D.enabled = true;
+		}
 		CheckTouch();
 	}
 
