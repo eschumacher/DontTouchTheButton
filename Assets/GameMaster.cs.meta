@@ -2,7 +2,26 @@ fileFormatVersion: 2
 guid: c06934bd533f031449095d340a491b22
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _buttonPrefab: {instanceID: 0}
+  - _powerUp2xPrefab: {instanceID: 0}
+  - _powerUpFreezePrefab: {instanceID: 0}
+  - _powerUpBombPrefab: {instanceID: 0}
+  - _digitsPrefab: {instanceID: 0}
+  - num0: {instanceID: 0}
+  - num1: {instanceID: 0}
+  - num2: {instanceID: 0}
+  - num3: {instanceID: 0}
+  - num4: {instanceID: 0}
+  - num5: {instanceID: 0}
+  - num6: {instanceID: 0}
+  - num7: {instanceID: 0}
+  - num8: {instanceID: 0}
+  - num9: {instanceID: 0}
+  - _timeDigit1: {instanceID: 0}
+  - _timeDigit2: {instanceID: 0}
+  - _timeDigit3: {instanceID: 0}
+  - _buttonExplosion: {fileID: 19800000, guid: 6d6d5715255b83f45882b8dbe53b73ef, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

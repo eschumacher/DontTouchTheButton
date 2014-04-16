@@ -195,6 +195,7 @@ MonoBehaviour:
   _timeDigit1: {fileID: 938285964}
   _timeDigit2: {fileID: 107672686}
   _timeDigit3: {fileID: 1833516764}
+  _buttonExplosion: {fileID: 19800000, guid: 6d6d5715255b83f45882b8dbe53b73ef, type: 2}
 --- !u!1 &500666317
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class GameMaster : MonoBehaviour {
 	public Sprite num5, num6, num7, num8, num9;
 	private Sprite[] _numSprites;
 	public PointsDigit _timeDigit1, _timeDigit2, _timeDigit3;
+	public ParticleSystem _buttonExplosion;
 
 	// power up variables
 	float _powerup2xTimer = 0.0f;
@@ -197,6 +198,15 @@ public class GameMaster : MonoBehaviour {
 	{
 		while (_buttons.Count > 0)
 		{
+			if (_powerupBombTimer > 0.0f)
+			{
+				// bomb effect if active
+				ParticleSystem newParticleSystem = Instantiate(_buttonExplosion,
+				                                               ((Button)_buttons[0]).transform.position,
+				                                               Quaternion.identity) as ParticleSystem;
+				Destroy (newParticleSystem.gameObject, newParticleSystem.startLifetime);
+			}
+
 			Destroy (((Button)_buttons[0]).gameObject);
 			_buttons.RemoveAt(0);
 		}
