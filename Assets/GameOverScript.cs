@@ -148,7 +148,7 @@ public class GameOverScript : MonoBehaviour {
 		}
 		else if (_points <= 99)
 		{
-			if (_pointsDigits.Count < 2)
+			while (_pointsDigits.Count < 2)
 			{
 				AddPointsDigit();
 			}
@@ -158,7 +158,7 @@ public class GameOverScript : MonoBehaviour {
 		}
 		else
 		{
-			if (_pointsDigits.Count < 3)
+			while (_pointsDigits.Count < 3)
 			{
 				AddPointsDigit();
 			}
@@ -177,7 +177,7 @@ public class GameOverScript : MonoBehaviour {
 		}
 		else if (_highScore <= 99)
 		{
-			if (_highScoreDigits.Count < 2)
+			while (_highScoreDigits.Count < 2)
 			{
 				AddHighScoreDigit();
 			}
@@ -187,11 +187,11 @@ public class GameOverScript : MonoBehaviour {
 		}
 		else
 		{
-			if (_highScoreDigits.Count < 3)
+			while (_highScoreDigits.Count < 3)
 			{
 				AddHighScoreDigit();
 			}
-			
+
 			((PointsDigit)_highScoreDigits[0]).SetSprite(_numSprites[_highScore / 100]);
 			((PointsDigit)_highScoreDigits[1]).SetSprite(_numSprites[(_highScore % 100) / 10]);
 			((PointsDigit)_highScoreDigits[2]).SetSprite(_numSprites[_highScore % 10]);
